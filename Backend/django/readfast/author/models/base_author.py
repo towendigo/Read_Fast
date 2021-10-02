@@ -1,4 +1,5 @@
 from django.db import models
+from readfast.model_loader import Multi_Loader_List
 from .data import Country_Select
 from .language import LanguageSet
 
@@ -24,6 +25,7 @@ class Author(models.Model):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
         author_lans = LanguageSet().values()
+        author_lans = Multi_Loader_List("author", author_lans)
         for author_lan in author_lans:
             author_child = author_lan(author=self)
             author_child.save()

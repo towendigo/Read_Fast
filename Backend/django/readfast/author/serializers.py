@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Author, Author_en, LanguageSet
+from .models import Author
+from .models.author_template import Author_TEMPLATE
 
-Author_Models = LanguageSet().values()
 
 class BaseAuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,5 +11,5 @@ class BaseAuthorSerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     author = BaseAuthorSerializer()
     class Meta:
-        model = Author_Models
-        fields = "__all__"
+        model = Author_TEMPLATE
+        fields = '__all__'
